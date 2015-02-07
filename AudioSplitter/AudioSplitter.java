@@ -30,13 +30,14 @@ public class AudioSplitter {
 	}
 	
 	public static void main(String[] args) {
-		if(args.length < 2) {
+		if(args.length < 3) {
 			System.out.println("Args: Seg-file-path wav-file-path");
 			return;
 		}
 		
 		String segFilePath = args[0];
-		String wavFilePath = args[1];		
+		String wavFilePath = args[1];
+		String outputPath = args[2];
 		
 		try {			
 			int part = 0;
@@ -58,7 +59,7 @@ public class AudioSplitter {
 		    	float startTime = (float)startTime100 / 100.0f;
 		    	float length = (float)length100 / 100.0f;
 		    	
-		    	createWavFileSubset(wavFilePath, "" + part + "-" + speaker + "-" + startTimeString + "-" + lengthString + ".wav", startTime, length);
+		    	createWavFileSubset(wavFilePath, outputPath + "/" + String.format("%05d", startTime100) + "-" + lengthString + "-" + speaker + "-" + ".wav", startTime, length);
 		    	
 		    	part++;
 		    }
@@ -67,3 +68,5 @@ public class AudioSplitter {
 		}
 	}
 }
+
+
